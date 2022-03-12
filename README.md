@@ -24,6 +24,7 @@ Once your `tasks.py` is setup like this `invoke` will have the extra commands:
 Available tasks:
 
   build    Build wheel.
+  ci       Run linting and test suite for Continuous Integration.
   format   Autoformat code for code style.
   lint     Linting and style checking.
   test     Run test suite.

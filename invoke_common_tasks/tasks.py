@@ -1,6 +1,8 @@
+# Standard Library
+import shutil
+
 # Third Party
 from invoke import task
-import shutil
 
 
 @task
@@ -29,3 +31,9 @@ def build(c):
     """Build wheel."""
     shutil.rmtree("dist/")
     c.run("poetry build -f wheel")
+
+
+@task(pre=[lint, test])
+def ci(c):
+    """Run linting and test suite for Continuous Integration."""
+    ...
