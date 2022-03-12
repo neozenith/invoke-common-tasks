@@ -1,0 +1,15 @@
+[flake8]
+exclude = 
+    venv,
+    dist,
+    .venv
+select = ANN,B,B9,BLK,C,D,DAR,E,F,I,S,W
+ignore = E203,E501,W503,D100,D104
+per-file-ignores =
+    tests/*: D103,S101
+max-line-length = 120
+max-complexity = 10
+import-order-style = google
+docstring-convention = google
+
+

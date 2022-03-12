@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "invoke-common-tasks"
+version = "0.1.0"
+description = "Some common tasks for PyInvoke to bootstrap your code quality and testing workflows."
+authors = ["Josh Peak <neozenith.dev@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/neozenith/invoke-common-tasks"
+repository = "https://github.com/neozenith/invoke-common-tasks"
+
+
+[tool.poetry.dependencies]
+python = "^3.8"
+invoke = "^1.6.0"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+flake8-docstrings = "^1.6.0"
+black = "^22.1.0"
+isort = "^5.10.1"
+pytest = "^7.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+import_heading_stdlib = "Standard Library"
+import_heading_firstparty = "Our Libraries"
+import_heading_thirdparty = "Third Party"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-s -vvv --color=yes"
+
+

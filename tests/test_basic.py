@@ -1,0 +1,3 @@
+def test_placholder():
+    """Placeholder test to pass CI until creating actual test suite."""
+    ...
