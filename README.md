@@ -86,7 +86,7 @@ You will notice a few things here:
 
 1. The method has no implementation `...`
 1. We are chaining a series of `@task`s in the `pre=[...]` argument
-1. The `default=True` on this root tasks means we could run either `invoke dev` or simply `invoke`.
+1. The `default=True` on this root tasks means we could run either `invoke all` or simply `invoke`.
 
 How cool is that?
 
