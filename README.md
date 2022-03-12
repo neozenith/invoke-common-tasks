@@ -77,7 +77,7 @@ from invoke import task
 from invoke_common_tasks import *
 
 @task(pre=[format, lint, test], default=True)
-def dev(c):
+def all(c):
   """Default development loop."""
   ...
 ```

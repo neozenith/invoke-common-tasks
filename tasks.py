@@ -6,6 +6,6 @@ from invoke_common_tasks import build, ci, format, lint, test  # noqa
 
 
 @task(pre=[format, lint, test], default=True)
-def dev(c):
+def all(c):
     """Default development workflow."""
     ...
