@@ -35,7 +35,7 @@ Available tasks:
 
 ### build
 
-Assuming you are using `poetry` this will build a wheel.
+Assuming you are using `poetry` this will build a wheel (and only a wheel).
 
 ### format
 
@@ -43,11 +43,50 @@ This will apply code formatting tools `black` and `isort`.
 
 These are only triggers for these commands, the specifics of configuration are up to you.
 
+Recommended configuration in your `pyproject.toml`:
+
+```toml
+[tool.black]
+line-length = 120
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+import_heading_stdlib = "Standard Library"
+import_heading_firstparty = "Our Libraries"
+import_heading_thirdparty = "Third Party"
+```
+
 ### lint
 
 This will run checks for `black`, `isort` and `flake8`.
 
 Up to you to specify your preferences of plugins for `flake8` and its configuration.
+
+Recommended configuration in `.flake8`:
+
+```ini
+[flake8]
+exclude = 
+    venv,
+    dist,
+    .venv
+select = ANN,B,B9,BLK,C,D,DAR,E,F,I,S,W
+ignore = E203,E501,W503,D100,D104
+per-file-ignores =
+    tests/*: D103,S101
+max-line-length = 120
+max-complexity = 10
+import-order-style = google
+docstring-convention = google
+```
+
+Recommended `flake8` plugins:
+ - [`flake8-docstrings`](https://pypi.org/project/flake8-docstrings/)
+
+More `flake8` plugins:
+
+https://github.com/DmytroLitvinov/awesome-flake8-extensions
 
 ### test
 
@@ -55,6 +94,22 @@ This will simply run `python3 -m pytest`. This is important to run as a module i
 a lot of import issues.
 
 You can simply not import this task if you prefer something else. But all config and plugins are left flexible for your own desires, this simply triggers the entrypoint.
+
+Recommended configuration in `pyproject.toml`:
+
+```toml
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-s -vv --color=yes"
+```
+
+Recommended `pytest` plugins:
+ - [`pytest-xdist`](https://pypi.org/project/pytest-xdist/) - Run tests in parallel using maximum cpu cores 
+ - [`pytest-randomly`](https://pypi.org/project/pytest-randomly/) - Run tests in random order each time to detect tests with unintentional dependencies to each other that should be isolated. Each run prints out the seed if you need to reproduce an exact seeded run.
+ 
+List of other `pytest` plugins:
+
+https://docs.pytest.org/en/latest/reference/plugin_list.html
 
 ### ci
 
@@ -66,6 +121,10 @@ This is a task with no commands but chains together `lint` and `test`.
  - test coverage
 
 Also auto-initialisations of some default config.
+
+## Roadmap
+
+This project will get marked as a stable v1.0 once the above TODO features are ticked off and this has seen at least 6 months in the wild in production.
 
 
 ## All Together
@@ -92,11 +151,21 @@ How cool is that?
 
 # Contributing
 
-Open an issue and lets have a chat to triage needs or concerns before you sink too much effort on a PR.
+At all times, you have the power to fork this project, make changes as you see fit and then:
 
-Or if you're pretty confident your change is inline with the direction of this project then go ahead and open that PR.
+```sh
+pip install https://github.com/user/repository/archive/branch.zip
+```
+[Stackoverflow: pip install from github branch](https://stackoverflow.com/a/24811490/622276)
 
-Or feel free to fork this project and rename it to your own variant. It's cool, I don't mind.
+That way you can run from your own custom fork in the interim or even in-house your work and simply use this project as a starting point. That is totally ok.
+
+However if you would like to contribute your changes back, then open a Pull Request "across forks".
+
+Once your changes are merged and published you can revert to the canonical version of `pip install`ing this package.
+
+If you're not sure how to make changes or if you should sink the time and effort, then open an Issue instead and we can have a chat to triage the issue.
+
 
 # Resources
 
