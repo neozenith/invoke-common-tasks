@@ -88,7 +88,13 @@ More `flake8` plugins:
 
 https://github.com/DmytroLitvinov/awesome-flake8-extensions
 
-### test
+### typecheck
+
+Simply runs `mypy --pretty --show-error-codes .`.
+
+Up to you to specify your `mypy.ini`.
+
+### test (and coverage)
 
 This will simply run `python3 -m pytest`. This is important to run as a module instead of `pytest` since it resolves
 a lot of import issues.
@@ -100,12 +106,19 @@ Recommended configuration in `pyproject.toml`:
 ```toml
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-s -vv --color=yes"
+addopts = "-s -vvv --color=yes --cov=. --no-cov-on-fail"
+
+[tool.coverage.run]
+omit = ["tests/*", "tasks.py"]
+branch = true
 ```
+
+Assuming you also install `pytest-cov` and `coverage[toml]`.
 
 Recommended `pytest` plugins:
  - [`pytest-xdist`](https://pypi.org/project/pytest-xdist/) - Run tests in parallel using maximum cpu cores 
  - [`pytest-randomly`](https://pypi.org/project/pytest-randomly/) - Run tests in random order each time to detect tests with unintentional dependencies to each other that should be isolated. Each run prints out the seed if you need to reproduce an exact seeded run.
+ - [`pytest-cov`](https://pypi.org/project/pytest-cov/) - It is recommended to run coverage from the `pytest` plugin.
  
 List of other `pytest` plugins:
 
@@ -113,14 +126,12 @@ https://docs.pytest.org/en/latest/reference/plugin_list.html
 
 ### ci
 
-This is a task with no commands but chains together `lint` and `test`. 
+This is a task with no commands but chains together `lint`, `typecheck` and `test`. 
 
 ## TODO
 
- - typechecking
- - test coverage
+ - Also auto-initialisations of some default config.
 
-Also auto-initialisations of some default config.
 
 ## Roadmap
 

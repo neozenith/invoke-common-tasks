@@ -21,6 +21,12 @@ def lint(c):
 
 
 @task
+def typecheck(c):
+    """Run typechecking tooling."""
+    c.run("mypy --pretty --show-error-codes .")
+
+
+@task
 def test(c):
     """Run test suite."""
     c.run("python3 -m pytest")
@@ -33,7 +39,7 @@ def build(c):
     c.run("poetry build -f wheel")
 
 
-@task(pre=[lint, test])
+@task(pre=[lint, typecheck, test])
 def ci(c):
     """Run linting and test suite for Continuous Integration."""
     ...

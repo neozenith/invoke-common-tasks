@@ -1,3 +1,3 @@
-def test_placholder():
+def test_placholder() -> None:
     """Placeholder test to pass CI until creating actual test suite."""
     ...

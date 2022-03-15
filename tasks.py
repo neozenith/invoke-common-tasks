@@ -2,10 +2,10 @@
 from invoke import task
 
 # Our Libraries
-from invoke_common_tasks import build, ci, format, lint, test  # noqa
+from invoke_common_tasks import build, ci, format, lint, test, typecheck  # noqa
 
 
-@task(pre=[format, lint, test], default=True)
+@task(pre=[format, ci], default=True)
 def all(c):
     """Default development workflow."""
     ...
