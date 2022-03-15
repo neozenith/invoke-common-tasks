@@ -23,11 +23,12 @@ Once your `tasks.py` is setup like this `invoke` will have the extra commands:
 λ invoke --list
 Available tasks:
 
-  build    Build wheel.
-  ci       Run linting and test suite for Continuous Integration.
-  format   Autoformat code for code style.
-  lint     Linting and style checking.
-  test     Run test suite.
+  build       Build wheel.
+  ci          Run linting and test suite for Continuous Integration.
+  format      Autoformat code for code style.
+  lint        Linting and style checking.
+  test        Run test suite.
+  typecheck   Run typechecking tooling.
 ```
 
 
@@ -130,7 +131,8 @@ This is a task with no commands but chains together `lint`, `typecheck` and `tes
 
 ## TODO
 
- - Also auto-initialisations of some default config.
+ - Auto-initialisations of some default config. 
+    - eg `invoke format --init` should set config if not present
 
 
 ## Roadmap
@@ -146,7 +148,7 @@ Once all the tasks are imported, you can create a custom task as your default ta
 from invoke import task
 from invoke_common_tasks import *
 
-@task(pre=[format, lint, test], default=True)
+@task(pre=[format, lint, typecheck, test], default=True)
 def all(c):
   """Default development loop."""
   ...
