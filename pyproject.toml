@@ -43,7 +43,7 @@ minversion = "6.0"
 addopts = "-s -vvv --color=yes --cov=. --no-cov-on-fail"
 
 [tool.coverage.run]
-omit = ["tests/*", "tasks.py"]
+omit = ["tests/*", "**/__init__.py", "tasks.py"]
 branch = true
 
 
