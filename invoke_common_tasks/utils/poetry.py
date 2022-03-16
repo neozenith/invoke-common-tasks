@@ -59,11 +59,11 @@ def __selected_projects(projects, search_dir="."):
 
     # Reconcile list of projects to apply command to
     if _projects is not None:
-        subset = set(_projects) - set(all_projects)
-        if len(subset) == 0:  # _projects is subset of all_projects
+        difference = set(_projects) - set(all_projects)
+        if difference = set():  # _projects is subset of all_projects
             projects = _projects
         else:
-            raise ValueError(f"The project '{subset}' is not one of {all_projects}")
+            raise ValueError(f"The project '{list(difference)}' is not one of {all_projects}")
     else:
         projects = all_projects
 
