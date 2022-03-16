@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "invoke-common-tasks"
-version = "0.2.1"
+version = "0.2.2"
 description = "Some common tasks for PyInvoke to bootstrap your code quality and testing workflows."
 authors = ["Josh Peak <neozenith.dev@gmail.com>"]
 license = "MIT"
@@ -13,6 +13,7 @@ repository = "https://github.com/neozenith/invoke-common-tasks"
 python = "^3.8"
 invoke = "^1.6.0"
 types-invoke = "^1.6.2"
+poetry-core = "^1.0.8"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
@@ -45,6 +46,22 @@ addopts = "-s -vvv --color=yes --cov=. --no-cov-on-fail"
 [tool.coverage.run]
 omit = ["tests/*", "**/__init__.py", "tasks.py"]
 branch = true
+
+[tool.mypy]
+pretty = true
+show_error_codes = true
+show_column_numbers = true
+show_error_context = true
+ignore_missing_imports = true
+exclude = [
+  'tests/',
+  'tasks\.py'
+]
+follow_imports = 'silent'
+# Work your way up to these:
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+# strict = true
 
 
 

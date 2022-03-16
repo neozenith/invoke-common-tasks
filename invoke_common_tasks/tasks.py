@@ -4,6 +4,10 @@ import shutil
 # Third Party
 from invoke import task
 
+# NOTE: Invoke tasks files don't support mypy typechecking for the forseeable future
+# They were looking at addressing it after Python2 EOL 01-01-2020 but there was a global pandemic.
+# https://github.com/pyinvoke/invoke/issues/357
+
 
 @task
 def format(c):
@@ -23,7 +27,7 @@ def lint(c):
 @task
 def typecheck(c):
     """Run typechecking tooling."""
-    c.run("mypy --pretty --show-error-codes .")
+    c.run("mypy .")
 
 
 @task
