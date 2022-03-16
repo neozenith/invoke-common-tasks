@@ -3,7 +3,7 @@ import os
 from functools import lru_cache
 from pathlib import Path
 from subprocess import CompletedProcess, run
-from typing import Optional, List
+from typing import List, Optional
 
 # Third Party
 from poetry.core.factory import Factory
