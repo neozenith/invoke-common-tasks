@@ -3,7 +3,7 @@ import os
 from functools import lru_cache
 from pathlib import Path
 from subprocess import CompletedProcess, run
-from typing import Optional
+from typing import Optional, List
 
 # Third Party
 from poetry.core.factory import Factory
@@ -46,7 +46,7 @@ def poetry_wheelname(path: str = ".") -> str:
     return builder.wheel_filename
 
 
-def __selected_projects(projects: Optional[str], search_dir: str = ".") -> list[str]:
+def __selected_projects(projects: Optional[str], search_dir: str = ".") -> List[str]:
     """Produce a set of either all projects or a validated single project."""
     # Collect list of dirs that are valid projects
     d = search_dir
