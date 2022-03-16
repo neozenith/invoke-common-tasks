@@ -93,7 +93,25 @@ https://github.com/DmytroLitvinov/awesome-flake8-extensions
 
 Simply runs `mypy --pretty --show-error-codes .`.
 
-Up to you to specify your `mypy.ini`.
+Recommended configuration to add to your `pyproject.toml`
+
+```toml
+[tool.mypy]
+pretty = true
+show_error_codes = true
+show_column_numbers = true
+show_error_context = true
+exclude = [
+  'tests/',
+  'tasks\.py'
+]
+follow_imports = 'silent'
+ignore_missing_imports = true
+# Work your way up to these:
+disallow_incomplete_defs = true
+# disallow_untyped_defs = true 
+# strict = true
+```
 
 ### test (and coverage)
 
