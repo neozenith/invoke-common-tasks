@@ -39,7 +39,7 @@ def test(c):
 @task
 def build(c):
     """Build wheel."""
-    shutil.rmtree("dist/")
+    shutil.rmtree("dist/", ignore_errors=True)
     c.run("poetry build -f wheel")
 
 
