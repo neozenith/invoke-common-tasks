@@ -24,13 +24,13 @@ def poetry_project(path: str = ".") -> Poetry:
 @lru_cache(maxsize=None)
 def poetry_project_name(path: str = ".") -> str:
     """Get the name of the current Poerty project."""
-    return poetry_project(path).pyproject.poetry_config["name"]
+    return str(poetry_project(path).pyproject.poetry_config["name"])
 
 
 @lru_cache(maxsize=None)
 def poetry_project_version(path: str = ".") -> str:
     """Get the version of the current Poerty project."""
-    return poetry_project(path).pyproject.poetry_config["version"]
+    return str(poetry_project(path).pyproject.poetry_config["version"])
 
 
 @lru_cache(maxsize=None)
@@ -43,7 +43,7 @@ def poetry_wheel_builder(path: str = ".") -> WheelBuilder:
 def poetry_wheelname(path: str = ".") -> str:
     """Get poetry properly formatted wheelname from WheelBuilder instance."""
     builder = poetry_wheel_builder(path)
-    return builder.wheel_filename
+    return str(builder.wheel_filename)
 
 
 def __selected_projects(projects: Optional[str], search_dir: str = ".") -> List[str]:
@@ -67,7 +67,7 @@ def __selected_projects(projects: Optional[str], search_dir: str = ".") -> List[
     return validated_projects
 
 
-def __run_in_subproject(command: str, project_path: str) -> CompletedProcess:
+def __run_in_subproject(command: str, project_path: str) -> CompletedProcess[bytes]:
     """Run a command in a poetry sub project."""
     target_venv_path = Path(os.environ["VIRTUAL_ENV"]).parent / project_path / ".venv"
     target_bin_path = str(target_venv_path / "bin")

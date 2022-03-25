@@ -7,14 +7,34 @@ Some common tasks for PyInvoke to bootstrap your code quality and testing workfl
 
 ```sh
 pip install invoke-common-tasks
+# Or
+pip install invoke-common-tasks[all]
 ```
+
+`invoke-common-tasks` defines a few _extras_, where you can also install the tooling to go with each task.
+By default we do not install the tools that these tasks call, since you could have different pinned versions than what we specify.
+
+However, you can install `all` of them or distinct subsets:
+
+ - **format** -> `black`, `isort`
+ - **lint** -> `flake8`, `flake8-docstrings`
+ - **typecheck** -> `mypy`
+ - **test** -> `pytest`, `pytest-cov`, `coverage[toml]`
+
+So you can specify the following if you only want `format` and `test`:
+
+```sh
+pip install invoke-common-tasks[format,test]
+```
+
+All _tasks_ will still be available but we won't install associated tooling.
 
 ### Invoke Setup
 
 `tasks.py`
 
 ```python
-from invoke_common_tasks import *
+from invoke_common_tasks import * # noqa
 ```
 
 Once your `tasks.py` is setup like this `invoke` will have the extra commands:
@@ -91,7 +111,7 @@ https://github.com/DmytroLitvinov/awesome-flake8-extensions
 
 ### typecheck
 
-Simply runs `mypy --pretty --show-error-codes .`.
+Simply runs `mypy .`.
 
 Recommended configuration to add to your `pyproject.toml`
 
@@ -107,9 +127,11 @@ exclude = [
 ]
 follow_imports = 'silent'
 ignore_missing_imports = true
+
 # Work your way up to these:
 disallow_incomplete_defs = true
 # disallow_untyped_defs = true 
+# disallow-untyped-calls = true
 # strict = true
 ```
 
