@@ -1,3 +1,4 @@
+# Third Party
 from poetry.core.pyproject.toml import PyProjectTOML
 
 FLAKE8 = """[flake8]

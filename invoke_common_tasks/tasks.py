@@ -1,11 +1,16 @@
 # Standard Library
 import shutil
 
-from .utils.poetry import poetry_project
-from .utils.config import add_format_config, add_typecheck_config, add_test_config, write_lint_config
-
 # Third Party
 from invoke import task
+
+from .utils.config import (
+    add_format_config,
+    add_test_config,
+    add_typecheck_config,
+    write_lint_config,
+)
+from .utils.poetry import poetry_project
 
 # NOTE: Invoke tasks files don't support mypy typechecking for the forseeable future
 # They were looking at addressing it after Python2 EOL 01-01-2020 but there was a global pandemic.
