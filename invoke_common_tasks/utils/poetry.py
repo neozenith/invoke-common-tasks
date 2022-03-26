@@ -66,8 +66,9 @@ def __selected_projects(projects: Optional[str], search_dir: str = ".") -> List[
 
     return validated_projects
 
+
 # Invoke blows up when importing and parsing type signatures with subscripted return types in Python3.8
-def __run_in_subproject(command: str, project_path: str): # type: ignore
+def __run_in_subproject(command: str, project_path: str):  # type: ignore
     """Run a command in a poetry sub project."""
     target_venv_path = Path(os.environ["VIRTUAL_ENV"]).parent / project_path / ".venv"
     target_bin_path = str(target_venv_path / "bin")
