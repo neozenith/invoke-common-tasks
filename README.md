@@ -8,11 +8,16 @@ Some common tasks for PyInvoke to bootstrap your code quality and testing workfl
 ```sh
 pip install invoke-common-tasks
 # Or
+poetry add -D invoke-common-tasks
+
+# With Extras
 pip install invoke-common-tasks[all]
+# Or
+poetry add -D invoke-common-tasks[all]
 ```
 
 `invoke-common-tasks` defines a few _extras_, where you can also install the tooling to go with each task.
-By default we do not install the tools that these tasks call, since you could have different pinned versions than what we specify.
+By default we **do not** install the tools that these tasks call, since you could have different pinned versions than what we specify.
 
 However, you can install `all` of them or distinct subsets:
 
@@ -43,14 +48,22 @@ Once your `tasks.py` is setup like this `invoke` will have the extra commands:
 λ invoke --list
 Available tasks:
 
-  build       Build wheel.
-  ci          Run linting and test suite for Continuous Integration.
-  format      Autoformat code for code style.
-  lint        Linting and style checking.
-  test        Run test suite.
-  typecheck   Run typechecking tooling.
+  build         Build wheel.
+  ci            Run linting and test suite for Continuous Integration.
+  format        Autoformat code for code style.
+  init-config   Setup default configuration for development tooling.
+  lint          Linting and style checking.
+  test          Run test suite.
+  typecheck     Run typechecking tooling.
 ```
 
+You can also initialise default configuration for each tool by running the following:
+
+```sh
+invoke init-config --all
+```
+
+More details in the [init-config](#init-config) section.
 
 ## The Tasks
 
@@ -169,6 +182,27 @@ https://docs.pytest.org/en/latest/reference/plugin_list.html
 
 This is a task with no commands but chains together `lint`, `typecheck` and `test`. 
 
+### init-config
+
+> Experimental: This feature is still in a pre-release state.
+
+Each of the above commands came with some recommended configuration.
+This command attempts to automate setting up even that part in your `pyproject.toml` and `.flake8` files.
+
+```sh
+λ invoke init-config --help
+Usage: inv[oke] [--core-opts] init-config [--options] [other tasks here ...]
+
+Docstring:
+  Setup default configuration for development tooling.
+
+Options:
+  -a, --all
+  -f, --format
+  -l, --lint
+  -t, --test
+  -y, --typecheck
+```
 ## TODO
 
  - Auto-initialisations of some default config. 
