@@ -3,7 +3,7 @@ import os
 from functools import lru_cache
 from pathlib import Path
 from subprocess import CompletedProcess, run
-from typing import List, Optional
+from typing import Any, List, Optional
 
 # Third Party
 from poetry.core.factory import Factory
@@ -67,7 +67,7 @@ def __selected_projects(projects: Optional[str], search_dir: str = ".") -> List[
     return validated_projects
 
 
-def __run_in_subproject(command: str, project_path: str) -> CompletedProcess[bytes]:
+def __run_in_subproject(command: str, project_path: str) -> CompletedProcess[Any]:
     """Run a command in a poetry sub project."""
     target_venv_path = Path(os.environ["VIRTUAL_ENV"]).parent / project_path / ".venv"
     target_bin_path = str(target_venv_path / "bin")

@@ -48,7 +48,6 @@ def add_typecheck_config(pyproject: PyProjectTOML) -> None:
 
     if "mypy" not in tools:
         mypy_table = table()
-        # TODO: For some reason this keeps escaping the \
         mypy_table["exclude"] = ["tests/", "tasks\.py"]  # noqa
         mypy_table["pretty"] = True
         mypy_table["show_error_codes"] = True
@@ -71,7 +70,6 @@ def add_test_config(pyproject: PyProjectTOML) -> None:
         ini_options["addopts"] = "-s -vvv --color=yes --cov=. --no-cov-on-fail"
 
         pytest_table = table()
-        pytest_table.is_super_table = True
         # TODO: For some reason nested tables are adding the intermediate table heading
         pytest_table["ini_options"] = ini_options
         tools["pytest"] = pytest_table
@@ -82,7 +80,5 @@ def add_test_config(pyproject: PyProjectTOML) -> None:
         run_table["omit"] = ["tests/*", "**/__init__.py", "tasks.py"]
 
         coverage_table = table()
-        coverage_table.is_super_table = True
-        # TODO: For some reason nested tables are adding the intermediate table heading
         coverage_table["run"] = run_table
         tools["coverage"] = coverage_table
