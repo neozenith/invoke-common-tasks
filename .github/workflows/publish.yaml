@@ -27,7 +27,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry config virtualenvs.create false
-          poetry install
+          poetry install -E all
       - name: Build package
         run: poetry build
       - name: Publish package

@@ -4,7 +4,6 @@
 name: Test Python Package
 
 on:
-  push: {}
   pull_request: {}
 
 jobs:
@@ -26,7 +25,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install poetry
           poetry config virtualenvs.create false
-          poetry install
+          poetry install -E all
       - name: Lint with flake8, black and isort
         run: |
           poetry run inv lint
