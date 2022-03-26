@@ -2,8 +2,8 @@
 import os
 from functools import lru_cache
 from pathlib import Path
-from subprocess import CompletedProcess, run
-from typing import Any, List, Optional
+from subprocess import run
+from typing import List, Optional
 
 # Third Party
 from poetry.core.factory import Factory
