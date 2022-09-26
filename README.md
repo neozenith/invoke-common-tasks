@@ -203,8 +203,10 @@ Options:
   -t, --test
   -y, --typecheck
 ```
+
 ## TODO
 
+ - Add task for auto generation of Sphinx Docs.
  - Auto-initialisations of some default config. 
     - eg `invoke format --init` should set config if not present
 
