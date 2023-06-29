@@ -9,6 +9,7 @@ from typing import List, Optional
 from poetry.core.factory import Factory
 from poetry.core.masonry.builders.wheel import WheelBuilder
 from poetry.core.poetry import Poetry
+from poetry.pyproject.toml import PyProjectTOML
 
 
 @lru_cache(maxsize=None)
@@ -19,6 +20,13 @@ def poetry_project(path: str = ".") -> Poetry:
     """
     poetry = Factory().create_poetry(Path(path).resolve())
     return poetry
+
+
+@lru_cache(maxsize=None)
+def poetry_pyprojecttoml(path: str = ".") -> PyProjectTOML:
+    """Create a writable instance of a PyProjectTOML since the poetry.core API treats it as read-only."""
+    pyproject_toml_filepath = poetry_project().pyproject_path
+    return PyProjectTOML(pyproject_toml_filepath)
 
 
 @lru_cache(maxsize=None)
