@@ -2,6 +2,28 @@
 
 Some common tasks for PyInvoke to bootstrap your code quality and testing workflows.
 
+<!--TOC-->
+
+- [Invoke Common Tasks](#invoke-common-tasks)
+  - [Getting Started](#getting-started)
+    - [Invoke Setup](#invoke-setup)
+  - [The Tasks](#the-tasks)
+    - [build](#build)
+    - [format](#format)
+    - [lint](#lint)
+    - [typecheck](#typecheck)
+    - [test (and coverage)](#test-and-coverage)
+    - [ci](#ci)
+    - [init-config](#init-config)
+  - [TODO](#todo)
+  - [Roadmap](#roadmap)
+  - [All Together](#all-together)
+- [Contributing](#contributing)
+- [Development](#development)
+- [Resources](#resources)
+- [Prior Art](#prior-art)
+
+<!--TOC-->
 
 ## Getting Started
 
@@ -13,7 +35,7 @@ poetry add -D invoke-common-tasks
 # With Extras
 pip install invoke-common-tasks[all]
 # Or
-poetry add -D invoke-common-tasks[all]
+poetry add --group dev invoke-common-tasks[all]
 ```
 
 `invoke-common-tasks` defines a few _extras_, where you can also install the tooling to go with each task.
@@ -207,8 +229,8 @@ Options:
 ## TODO
 
  - Add task for auto generation of Sphinx Docs.
- - Auto-initialisations of some default config. 
-    - eg `invoke format --init` should set config if not present
+ - Add typechecking support to root `tasks.py` file now that Invoke v2+ is released.
+
 
 
 ## Roadmap
@@ -254,6 +276,16 @@ However if you would like to contribute your changes back, then open a Pull Requ
 Once your changes are merged and published you can revert to the canonical version of `pip install`ing this package.
 
 If you're not sure how to make changes or if you should sink the time and effort, then open an Issue instead and we can have a chat to triage the issue.
+
+# Development
+
+```sh
+git clone https://github.com/neozenith/invoke-common-tasks
+cd invoke-common-tasks
+poetry shell
+# This will not install the dev dependencies which are optional when a consumer uses the project but are actually needed for development of this library
+poetry install --all-extras
+```
 
 
 # Resources

@@ -19,5 +19,5 @@ def git_current_branch() -> str:
     # https://stackoverflow.com/questions/6245570/how-to-get-the-current-branch-name-in-git#comment50696859_11868440
     if branch_name == "HEAD":
         branch_name = run("git rev-parse --short HEAD", hide=True).stdout.strip()
-    
+
     return branch_name

@@ -1,6 +1,7 @@
 # Third Party
-from poetry.core._vendor.tomlkit import table
-from poetry.core.pyproject.toml import PyProjectTOML
+from poetry.pyproject.toml import PyProjectTOML
+from tomlkit.api import table
+from tomlkit.items import Table
 
 FLAKE8 = """[flake8]
 exclude =
@@ -28,12 +29,12 @@ def add_format_config(pyproject: PyProjectTOML) -> None:
     """Augment pyproject.toml in memory with default formatting config."""
     tools = pyproject.data["tool"]
     if "black" not in tools:
-        black_table = table()
+        black_table: Table = table()
         black_table["line-length"] = 120
         tools["black"] = black_table
 
     if "isort" not in tools:
-        isort_table = table()
+        isort_table: Table = table()
         isort_table["profile"] = "black"
         isort_table["multi_line_output"] = 3
         isort_table["import_heading_stdlib"] = "Standard Library"
@@ -47,7 +48,7 @@ def add_typecheck_config(pyproject: PyProjectTOML) -> None:
     tools = pyproject.data["tool"]
 
     if "mypy" not in tools:
-        mypy_table = table()
+        mypy_table: Table = table()
         mypy_table["exclude"] = ["tests/", "tasks\.py"]  # noqa
         mypy_table["pretty"] = True
         mypy_table["show_error_codes"] = True
@@ -65,20 +66,20 @@ def add_test_config(pyproject: PyProjectTOML) -> None:
     """Augment pyproject.toml in memory with default test config."""
     tools = pyproject.data["tool"]
     if "pytest" not in tools:
-        ini_options = table()
+        ini_options: Table = table()
         ini_options["minversion"] = "6.0"
         ini_options["addopts"] = "-s -vvv --color=yes --cov=. --no-cov-on-fail"
 
-        pytest_table = table()
+        pytest_table: Table = table()
         # TODO: For some reason nested tables are adding the intermediate table heading
         pytest_table["ini_options"] = ini_options
         tools["pytest"] = pytest_table
 
     if "coverage" not in tools:
-        run_table = table()
+        run_table: Table = table()
         run_table["branch"] = True
         run_table["omit"] = ["tests/*", "**/__init__.py", "tasks.py"]
 
-        coverage_table = table()
+        coverage_table: Table = table()
         coverage_table["run"] = run_table
         tools["coverage"] = coverage_table

@@ -10,7 +10,7 @@ from .utils.config import (
     add_typecheck_config,
     write_lint_config,
 )
-from .utils.poetry import poetry_project
+from .utils.poetry import poetry_pyprojecttoml
 
 # NOTE: Invoke tasks files don't support mypy typechecking for the forseeable future
 # They were looking at addressing it after Python2 EOL 01-01-2020 but there was a global pandemic.
@@ -72,8 +72,7 @@ def init_config(c, format=False, lint=False, test=False, typecheck=False, all=Fa
     print(f"typecheck: {typecheck}")
     print(f"test:      {test}")
 
-    project = poetry_project()
-    pyproject = project.pyproject
+    pyproject = poetry_pyprojecttoml()
 
     if format:
         print("Adding format config...")
