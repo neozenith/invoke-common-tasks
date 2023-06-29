@@ -18,9 +18,8 @@ def all(c):
     """Default development workflow."""
     ...
 
+
 @task
 def toc(c):
     """Automate documentation tasks."""
     c.run("md_toc --in-place github --header-levels 4 README.md")
-
-    
