@@ -87,6 +87,26 @@ invoke init-config --all
 
 More details in the [init-config](#init-config) section.
 
+### Invoke Bonus Setup
+
+This is an extra code snippet for my benefit for some ways of working that make my life easier. I'll likely incorporate it into the library eventually as a helper function.
+
+```python
+# Standard Library
+from pathlib import Path
+
+# Third Party
+import tomlkit
+from invoke import task, run
+
+git_repo_root = Path(run("git rev-parse --show-toplevel", hide=True).stdout.strip())
+pyproject = tomlkit.parse((git_repo_root / "pyproject.toml").read_text())
+version = pyproject["tool"]["poetry"]["version"]
+image_name = pyproject["tool"]["poetry"]["name"]
+image_tag_latest = f"{image_name}:latest"
+image_tag_versioned = f"{image_name}:{version}"
+```
+
 ## The Tasks
 
 ### build
